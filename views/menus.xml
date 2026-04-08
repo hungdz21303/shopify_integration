@@ -1,0 +1,12 @@
+<odoo>
+  <data>
+    <record id="action_shopify_config" model="ir.actions.act_window">
+    <field name="name">Shopify Configuration</field>
+    <field name="res_model">shopify.config</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<menuitem id="menu_shopify_root" name="Shopify Integration" sequence="10"/>
+<menuitem id="menu_shopify_config" name="Configurations" parent="menu_shopify_root" action="action_shopify_config" sequence="20"/>
+  </data>
+</odoo>

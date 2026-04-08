@@ -1,0 +1,23 @@
+<odoo>  
+    <data>
+<record id="view_shopify_log_tree" model="ir.ui.view">
+    <field name="name">shopify.log.tree</field>
+    <field name="model">shopify.log</field>
+    <field name="arch" type="xml">
+        <tree decoration-danger="status == 'failed'" decoration-success="status == 'success'">
+            <field name="create_date"/>
+            <field name="sync_type"/>
+            <field name="status" widget="badge"/>
+            <field name="message"/>
+            <field name="shopify_record_id"/>
+        </tree>
+    </field>
+</record>
+
+<record id="action_shopify_log" model="ir.actions.act_window">
+    <field name="name">Sync Logs</field>
+    <field name="res_model">shopify.log</field>
+    <field name="view_mode">tree,form</field>
+</record>
+    </data>     
+</odoo>
