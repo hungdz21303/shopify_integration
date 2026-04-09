@@ -3,7 +3,7 @@
     <record id="action_shopify_config" model="ir.actions.act_window">
     <field name="name">Shopify Configuration</field>
     <field name="res_model">shopify.config</field>
-    <field name="view_mode">tree,form</field>
+    <field name="view_mode">list,form</field>
 </record>
 
 <menuitem id="menu_shopify_root" name="Shopify Integration" sequence="10"/>

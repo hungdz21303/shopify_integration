@@ -1,14 +1,14 @@
 <odoo>
   <data>
-<record id="view_shopify_config_tree" model="ir.ui.view">
-    <field name="name">shopify.config.tree</field>
+<record id="view_shopify_config_list" model="ir.ui.view">
+    <field name="name">shopify.config.list</field>
     <field name="model">shopify.config</field>
     <field name="arch" type="xml">
-        <tree>
+        <list>
             <field name="name"/>
             <field name="shop_url"/>
             <field name="last_sync_date"/>
-        </tree>
+        </list>
     </field>
 </record>
 
