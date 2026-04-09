@@ -8,5 +8,10 @@
 
 <menuitem id="menu_shopify_root" name="Shopify Integration" sequence="10"/>
 <menuitem id="menu_shopify_config" name="Configurations" parent="menu_shopify_root" action="action_shopify_config" sequence="20"/>
+<menuitem id="menu_shopify_sync_wizard" 
+          name="Đồng bộ thủ công" 
+          parent="menu_shopify_root" 
+          action="action_shopify_sync_wizard" 
+          sequence="25"/>
   </data>
 </odoo>

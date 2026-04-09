@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <record id="view_shopify_sync_wizard_form" model="ir.ui.view">
+    <field name="name">shopify.sync.wizard.form</field>
+    <field name="model">shopify.sync.wizard</field>
+    <field name="arch" type="xml">
+        <form string="Đồng bộ dữ liệu Shopify">
+            <group>
+                <field name="config_id"/>
+                <field name="sync_type" widget="radio"/>
+            </group>
+            <footer>
+                <button name="action_sync" string="Bắt đầu ngay" type="object" class="btn-primary"/>
+                <button string="Hủy bỏ" class="btn-secondary" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+<record id="action_shopify_sync_wizard" model="ir.actions.act_window">
+    <field name="name">Đồng bộ thủ công</field>
+    <field name="res_model">shopify.sync.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field> </record>
+    </data>
+</odoo>
