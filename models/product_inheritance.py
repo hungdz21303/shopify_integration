@@ -5,8 +5,8 @@ class ProductTemplate(models.Model):
 
     shopify_id = fields.Char("Shopify ID", copy=False)
 
-    def sync_products(self):
-        configs = self.env['shopify.config'].search([])
+    def sync_products(self, config_id=None):
+        configs = config_id if config_id else self.env['shopify.config'].search([])
         for config in configs:
             data = config._make_request('products')
             if not data: continue

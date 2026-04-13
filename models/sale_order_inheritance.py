@@ -6,8 +6,8 @@ class SaleOrder(models.Model):
     shopify_order_id = fields.Char("Shopify Order ID")
 
     @api.model
-    def import_orders(self):
-        configs = self.env['shopify.config'].search([])
+    def import_orders(self, config_id=None):
+        configs = config_id if config_id else self.env['shopify.config'].search([])
         for config in configs:
             # Chỉ lấy đơn hàng mới từ lần sync cuối
             params = {}
