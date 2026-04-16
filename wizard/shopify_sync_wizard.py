@@ -20,10 +20,11 @@ class ShopifySyncWizard(models.TransientModel):
 
         if self.sync_type == 'product':
             # Truyền config_id vào để hàm biết lấy API Key/URL từ đâu
-            self.env['product.template'].sync_products(self.config_id)
+            # self.env['product.template'].sync_products(self.config_id)
+            self.config_id.action_sync_products_cron()  # Gọi hàm Cron để tận dụng logging và xử lý lỗi tốt hơn
         else:
             # Tương tự cho đơn hàng
-            self.env['sale.order'].import_orders(self.config_id)
+            self.config_id.action_sync_orders_cron()
             
         return {
             'type': 'ir.actions.client',

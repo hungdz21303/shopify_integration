@@ -17,7 +17,7 @@ class ShopifyConfig(models.Model):
 
     def _make_request(self, endpoint, method='GET', params=None, json_data=None):
         clean_host = self.shop_url.replace('https://', '').replace('http://', '').strip('/')
-        url = f"https://{clean_host}/admin/api/2021-01/{endpoint}.json"
+        url = f"https://{clean_host}/admin/api/2026-04/{endpoint}.json"
         headers = {
             'Content-Type': 'application/json',
             'X-Shopify-Access-Token': self.api_token
@@ -30,12 +30,17 @@ class ShopifyConfig(models.Model):
             res.raise_for_status()
             return res.json()
         except Exception as e:
-            self.env['shopify.log'].create({
-                'config_id': self.id,
-                'status': 'failed',
-                'message': f"API Error: {str(e)}",
-            })
-            return False
+            print(">>> THỰC SỰ LỖI Ở ĐÂY:", str(e))
+            if hasattr(e, 'response') and e.response is not None:
+                print(">>> CHI TIẾT LỖI TỪ SHOPIFY:", e.response.text)
+                
+
+            # self.env['shopify.log'].create({
+            #     'config_id': self.id,
+            #     'status': 'failed',
+            #     'message': f"API Error: {str(e)}",
+            # })
+            # return False
     def action_test_connection(self):
         result = self._make_request('shop')
         if result:
@@ -56,9 +61,12 @@ class ShopifyConfig(models.Model):
             config.import_orders()
 
     def import_orders(self):
-        """Logic chính để kéo đơn hàng về Odoo"""
+        
         self.ensure_one()
         params = {'status': 'any'} # Có thể lấy mọi trạng thái đơn hàng
+        data = self._make_request('orders', params=params)
+        print("--- DỮ LIỆU SHOPIFY TRẢ VỀ: ---", data) # Xem đơn hàng có nằm trong list này không
+        """Logic chính để kéo đơn hàng về Odoo"""
         
         # Chỉ lấy đơn hàng mới phát sinh sau lần đồng bộ cuối
         if self.last_sync_date:
