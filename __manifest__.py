@@ -27,6 +27,7 @@ Long description of module's purpose
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'data/ir_cron_data.xml',
         'wizard/shopify_sync_wizard_views.xml',
         'views/menus.xml',
         'views/shopify_config_views.xml',
