@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_shopify_config,shopify.config,model_shopify_config,base.group_user,1,1,1,1
-access_shopify_log,shopify.log,model_shopify_log,base.group_user,1,1,1,1
-access_shopify_sync_wizard,shopify.sync.wizard,model_shopify_sync_wizard,base.group_user,1,1,1,1
+access_shopify_config,model_shopify_config,model_shopify_config,base.group_user,1,1,1,1
+access_shopify_log,model_shopify_log,model_shopify_log,base.group_user,1,1,1,1
+access_shopify_sync_wizard,model_shopify_sync_wizard,model_shopify_sync_wizard,base.group_user,1,1,1,1
