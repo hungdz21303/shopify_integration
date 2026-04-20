@@ -49,3 +49,4 @@ class ProductTemplate(models.Model):
                 config.write({'last_sync_date': fields.Datetime.now()})
             except Exception as e:
                 self._logger.error(f"Error syncing products for config {config.id}: {str(e)}")
+

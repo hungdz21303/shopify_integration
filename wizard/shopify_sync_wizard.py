@@ -8,7 +8,8 @@ class ShopifySyncWizard(models.TransientModel):
     config_id = fields.Many2one('shopify.config', string="Cửa hàng", required=True)
     
     sync_type = fields.Selection([
-        ('product', 'Đồng bộ Sản phẩm'),
+        ('product', 'Đồng bộ Sản phẩm (chỉ mới/cập nhật)'),
+        ('product_full', 'Đồng bộ Toàn bộ Sản phẩm'),
         ('order', 'Nhập Đơn hàng')
     ], string="Loại đồng bộ", default='product')
 
@@ -19,21 +20,8 @@ class ShopifySyncWizard(models.TransientModel):
             raise UserError("Vui lòng chọn một cửa hàng để đồng bộ!")
 
         if self.sync_type == 'product':
-            # Truyền config_id vào để hàm biết lấy API Key/URL từ đâu
-            # self.env['product.template'].sync_products(self.config_id)
-            self.config_id.action_sync_products_cron()  # Gọi hàm Cron để tận dụng logging và xử lý lỗi tốt hơn
+            return self.config_id.import_products()
+        elif self.sync_type == 'product_full':
+            return self.config_id.sync_all_products()
         else:
-            # Tương tự cho đơn hàng
-            self.config_id.action_sync_orders_cron()
-            
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'display_notification',
-            'params': {
-                'title': 'Thông báo',
-                'message': f'Đã bắt đầu đồng bộ {self.sync_type} từ {self.config_id.name}',
-                'type': 'success',
-                'sticky': False,
-                'next': {'type': 'ir.actions.act_window_close'}, # Đóng wizard sau khi bấm
-            }
-        }
+            return self.config_id.import_orders_with_notification()
